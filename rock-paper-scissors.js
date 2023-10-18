@@ -78,5 +78,15 @@ function game () {
 }
 
 function displayScore () {
-    console.log("Player wins = " + playerScore + "\n" + "Computer wins = " + computerScore + "\n" + "Draws = " + draws);
+    let winner;
+    if (playerScore > computerScore) {
+        winner = "Player wins.";
+    }
+    else if (computerScore > playerScore) {
+        winner = "Computer wins.";
+    }
+    else {
+        winner = "It is a Draw.";
+    }
+    console.log("Player wins = " + playerScore + "\n" + "Computer wins = " + computerScore + "\n" + "Draws = " + draws + "\n" + winner);
 }
