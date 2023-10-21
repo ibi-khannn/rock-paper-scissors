@@ -1,21 +1,59 @@
 let playerScore = 0;
 let computerScore = 0;
 let draws = 0;
+let playerChoice;
 
-game ();
-displayScore();
+const div1 = document.createElement("div");
+const div2 = document.createElement("div");
+const body = document.querySelector("body");
+const rock = document.createElement("button");
+const scissors = document.createElement("button");
+const paper = document.createElement("button");
+rock.textContent = "Rock";
+scissors.textContent = "Scissors";
+paper.textContent = "Paper";
+div1.style.display = "flex";
+div1.style.justifyContent = "center";
+div1.style.padding = "100px";
+div2.style.display = "flex";
+div2.style.justifyContent = "center";
+body.appendChild(div1);
+body.appendChild(div2);
+div1.appendChild(rock);
+div1.appendChild(scissors);
+div1.appendChild(paper);
+const btns = document.querySelectorAll("button");
+    
+    for (i = 0; i < btns.length; i++) {
+        btns[i].style.padding = "50px";
+        btns[i].style.margin = "50px";
+    }
+    btns.forEach ((button) => {
+        button.addEventListener ("mouseenter", () => {
+            button.style.backgroundColor = "yellow";
+        })
+        button.addEventListener ("mouseleave", () => {
+            button.style.backgroundColor = "";
+        })
+        button.addEventListener ("click", () => {
+            button.style.backgroundColor = "#4ef542";
+            playerChoice = button.textContent.toLowerCase();
+            playRound(playerChoice, getComputerChoice());
+            displayScore();
+        })
+    })
 
 function getComputerChoice () {
     let choices = ["rock", "paper", "scissors"];
-    let randomIndex = Math.floor(Math.random() * choices.length);
+    let randomIndex = Math.floor(Math.random() * choices.length); // choices.length because Math.floor rounds as Math.floor(2.99) to 2
     let computerChoice = choices[randomIndex];
     return computerChoice;
 }
 
-function getPlayerChoice () {
-    let playerChoice = prompt("Enter an option from Rock, Paper, or Scissors.").toLowerCase();
-    return playerChoice;
-}
+// function getPlayerChoice () {
+//     let playerChoice = prompt("Enter an option from Rock, Paper, or Scissors.").toLowerCase();
+//     return playerChoice;
+// }
 
 function playRound (playerSelection, computerSelection) {
     if (playerSelection === "rock" && computerSelection === "rock") {
@@ -57,25 +95,13 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function game () {
-/*     let playerScore = 0;
-    let computerScore = 0;
-    draws = 0;
-    if (playRound (getPlayerChoice(), getComputerChoice()) === "Won") {
-        playerScore++;
-    }
-    else if ((playRound (getPlayerChoice(), getComputerChoice()) === "Lost")) {
-        computerScore++;
-    }
-    else {
-        draws++;
-    } */
-    playRound (getPlayerChoice(), getComputerChoice());
-    playRound (getPlayerChoice(), getComputerChoice());
-    playRound (getPlayerChoice(), getComputerChoice());
-    playRound (getPlayerChoice(), getComputerChoice());
-    playRound (getPlayerChoice(), getComputerChoice());
-}
+// function game () {
+//     playRound (getPlayerChoice(), getComputerChoice());
+//     playRound (getPlayerChoice(), getComputerChoice());
+//     playRound (getPlayerChoice(), getComputerChoice());
+//     playRound (getPlayerChoice(), getComputerChoice());
+//     playRound (getPlayerChoice(), getComputerChoice());
+// }
 
 function displayScore () {
     let winner;
@@ -88,5 +114,9 @@ function displayScore () {
     else {
         winner = "It is a Draw.";
     }
-    console.log("Player wins = " + playerScore + "\n" + "Computer wins = " + computerScore + "\n" + "Draws = " + draws + "\n" + winner);
+    div2.style.whiteSpace = "pre-line"; // displays content with line breaks
+    div2.textContent = "Player wins = " + playerScore + "\n" + "Computer wins = " + computerScore + "\n" + "Draws = " + draws;
+    if (playerScore >= 5 || computerScore >= 5) {
+    div2.textContent = div2.textContent + "\n" + winner;
+    }
 }
