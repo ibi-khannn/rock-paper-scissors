@@ -25,8 +25,8 @@ div1.appendChild(paper);
 const btns = document.querySelectorAll("button");
     
     for (i = 0; i < btns.length; i++) {
-        btns[i].style.padding = "50px";
-        btns[i].style.margin = "50px";
+        btns[i].style.padding = "50px"; // can also work inside the forEach block like the statement ahead, both ways work
+        // btns[i].style.margin = "50px";
     }
     btns.forEach ((button) => {
         button.addEventListener ("mouseenter", () => {
@@ -41,6 +41,7 @@ const btns = document.querySelectorAll("button");
             playRound(playerChoice, getComputerChoice());
             displayScore();
         })
+        button.style.margin = "50px";
     })
 
 function getComputerChoice () {
